@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PassageiroRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Atividade3</a> &gt; <a href="index.source.html" class="el_package">org.example.repositories</a> &gt; <span class="el_source">PassageiroRepository.java</span></div><h1>PassageiroRepository.java</h1><pre class="source lang-java linenums">package org.example.repositories;
+
+import org.example.entities.Passageiro;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="fc" id="L8">public class PassageiroRepository {</span>
+<span class="fc" id="L9">    private List&lt;Passageiro&gt; passageiros = new ArrayList&lt;Passageiro&gt;();</span>
+
+    public List&lt;Passageiro&gt; buscarTodos() {
+<span class="fc" id="L12">        return passageiros;</span>
+    }
+
+    public Passageiro buscarPorId(int id) {
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        Passageiro passageiro = passageiros.stream().filter(p -&gt; p.getId() == id).findFirst().get();</span>
+<span class="nc" id="L17">        return passageiro;</span>
+    }
+
+    public boolean existe(int id) {
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        return passageiros.stream().anyMatch(p -&gt; p.getId() == id);</span>
+    }
+
+    public void salvar(Passageiro passageiro) {
+<span class="fc" id="L25">        passageiros.add(passageiro);</span>
+<span class="fc" id="L26">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

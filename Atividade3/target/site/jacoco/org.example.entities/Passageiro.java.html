@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Passageiro.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Atividade3</a> &gt; <a href="index.source.html" class="el_package">org.example.entities</a> &gt; <span class="el_source">Passageiro.java</span></div><h1>Passageiro.java</h1><pre class="source lang-java linenums">package org.example.entities;
+
+public class Passageiro {
+    private int id;
+    private String nome;
+    private String cpf;
+    private String email;
+
+<span class="fc" id="L9">    public Passageiro(int id, String nome, String cpf, String email) {</span>
+<span class="fc" id="L10">        this.id = id;</span>
+<span class="fc" id="L11">        this.nome = nome;</span>
+<span class="fc" id="L12">        this.cpf = cpf;</span>
+<span class="fc" id="L13">        this.email = email;</span>
+<span class="fc" id="L14">    }</span>
+
+    public int getId() {
+<span class="fc" id="L17">        return this.id;</span>
+    }
+
+    public String getNome() {
+<span class="fc" id="L21">        return nome;</span>
+    }
+
+
+    public String getCpf() {
+<span class="fc" id="L26">        return cpf;</span>
+    }
+
+    public String getEmail() {
+<span class="fc" id="L30">        return email;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L35">        return &quot;Passageiro{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, nome='&quot; + nome + '\'' +
+                &quot;, cpf='&quot; + cpf + '\'' +
+                &quot;, email='&quot; + email + '\'' +
+                '}';
+    }
+
+    public boolean validarCPF(String cpf) {
+<span class="fc" id="L44">        cpf = cpf.replaceAll(&quot;[^\\d]&quot;, &quot;&quot;);</span>
+<span class="pc bpc" id="L45" title="1 of 4 branches missed.">        if (cpf.length() != 11 || cpf.matches(&quot;(\\d)\\1{10}&quot;)) {</span>
+<span class="fc" id="L46">            return false;</span>
+        }
+        try {
+<span class="fc" id="L49">            int soma = 0, peso = 10;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc" id="L51">                soma += (cpf.charAt(i) - '0') * peso--;</span>
+            }
+<span class="fc" id="L53">            int primeiroDigito = 11 - (soma % 11);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (primeiroDigito &gt;= 10) primeiroDigito = 0;</span>
+
+<span class="fc" id="L56">            soma = 0;</span>
+<span class="fc" id="L57">            peso = 11;</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            for (int i = 0; i &lt; 10; i++) {</span>
+<span class="fc" id="L59">                soma += (cpf.charAt(i) - '0') * peso--;</span>
+            }
+<span class="fc" id="L61">            int segundoDigito = 11 - (soma % 11);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (segundoDigito &gt;= 10) segundoDigito = 0;</span>
+
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            return cpf.charAt(9) - '0' == primeiroDigito &amp;&amp;</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">                    cpf.charAt(10) - '0' == segundoDigito;</span>
+<span class="nc" id="L66">        } catch (Exception e) {</span>
+<span class="nc" id="L67">            return false;</span>
+        }
+    }
+
+    public boolean validarEmail(String email) {
+<span class="fc" id="L72">        String regex = &quot;^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$&quot;;</span>
+<span class="pc bpc" id="L73" title="1 of 4 branches missed.">        return email != null &amp;&amp; email.matches(regex);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
