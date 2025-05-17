@@ -6,7 +6,6 @@ import org.example.entities.Voo;
 import org.example.repositories.ReservaRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReservaApplication {
     private ReservaRepository reservaRepository;
@@ -20,7 +19,7 @@ public class ReservaApplication {
     }
 
     public boolean salvar(Reserva reserva) {
-        if (reserva.getVoo().vagasDisponiveis() < 0) {
+        if (calcularVagasDisponiveis(reserva.getVoo()) <= 0) {
             return false;
         }
         if (verificarDuplicidade(reserva)) {
@@ -43,5 +42,13 @@ public class ReservaApplication {
     private String gerarChave(Passageiro passageiro, Voo voo) {
         return passageiro.getId() + "-" + voo.getId();
     }
+
+    private int calcularVagasDisponiveis(Voo voo) {
+        long reservasNoVoo = reservaRepository.buscarTodos().stream()
+                .filter(r -> r.getVoo().getId() == voo.getId())
+                .count();
+        return voo.getAviao().getCapacidade() - (int) reservasNoVoo;
+    }
+
 
 }

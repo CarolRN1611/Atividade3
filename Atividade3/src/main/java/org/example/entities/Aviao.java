@@ -29,6 +29,10 @@ public class Aviao {
         return capacidade;
     }
 
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
     public String getFabricante() {
         return fabricante;
     }

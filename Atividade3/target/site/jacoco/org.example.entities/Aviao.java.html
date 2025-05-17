@@ -29,17 +29,21 @@ public class Aviao {
 <span class="fc" id="L29">        return capacidade;</span>
     }
 
+    public void setCapacidade(int capacidade) {
+<span class="fc" id="L33">        this.capacidade = capacidade;</span>
+<span class="fc" id="L34">    }</span>
+
     public String getFabricante() {
-<span class="fc" id="L33">        return fabricante;</span>
+<span class="fc" id="L37">        return fabricante;</span>
     }
 
     public List&lt;Voo&gt; getVoos() {
-<span class="fc" id="L37">        return voos;</span>
+<span class="nc" id="L41">        return voos;</span>
     }
 
     @Override
     public String toString() {
-<span class="fc" id="L42">        return &quot;Aviao{&quot; +</span>
+<span class="fc" id="L46">        return &quot;Aviao{&quot; +</span>
                 &quot;id=&quot; + id +
                 &quot;, modelo='&quot; + modelo + '\'' +
                 &quot;, capacidade=&quot; + capacidade +

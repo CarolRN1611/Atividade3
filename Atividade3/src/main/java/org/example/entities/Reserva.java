@@ -13,7 +13,6 @@ public class Reserva {
         this.passageiro = passageiro;
         this.voo = voo;
         this.dataReserva = dataReserva;
-        voo.getReservas().add(this);
     }
 
     public int getId() {

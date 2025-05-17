@@ -17,10 +17,6 @@ public class AviaoRepository {
         return aviao;
     }
 
-    public boolean existe(int id) {
-        return avioes.stream().anyMatch(p -> p.getId() == id);
-    }
-
     public void salvar(Aviao aviao) {
         avioes.add(aviao);
     }

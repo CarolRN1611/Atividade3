@@ -24,10 +24,6 @@ public class VooApplication {
             System.out.println("Erro: O voo deve estar vinculado a um avião.");
             return false;
         }
-        if (voo.vagasDisponiveis() <= 0) {
-            System.out.println("Erro: O voo não possui vagas disponíveis.");
-            return false;
-        }
 
         this.vooRepository.salvar(voo);
         return true;

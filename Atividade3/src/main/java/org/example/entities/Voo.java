@@ -10,7 +10,6 @@ public class Voo {
     private String destino;
     private LocalDateTime dataHora;
     private Aviao aviao;
-    private List<Reserva> reservas = new ArrayList<>();
 
     public Voo(int id, String origem, String destino, LocalDateTime dataHora, Aviao aviao) {
         this.id = id;
@@ -38,14 +37,6 @@ public class Voo {
 
     public Aviao getAviao() {
         return aviao;
-    }
-
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public int vagasDisponiveis(){
-        return (aviao.getCapacidade() - reservas.size());
     }
 
     @Override

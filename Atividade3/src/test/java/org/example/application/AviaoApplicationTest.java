@@ -1,4 +1,5 @@
-import org.example.application.AviaoApplication;
+package org.example.application;
+
 import org.example.entities.Aviao;
 import org.example.repositories.AviaoRepository;
 import org.junit.jupiter.api.Assertions;
@@ -7,37 +8,38 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class AviaoTest {
-    private Aviao aviaoValido;
-    private Aviao aviaoCapacidadeZero;
-    private Aviao aviaoCapacidadeNegativa;
-    private AviaoRepository aviaoRepository;
-    private AviaoApplication aviaoApplication;
+public class AviaoApplicationTest {
+    AviaoApplication aviaoApplication;
+    AviaoRepository aviaoRepository;
+    Aviao aviao;
 
     @BeforeEach
     public void setUp() {
         aviaoRepository = new AviaoRepository();
         aviaoApplication = new AviaoApplication(aviaoRepository);
-        aviaoValido = new Aviao(1,"EMB 190",2,"Embraer");
-        aviaoCapacidadeZero = new Aviao(2,"Boeing 737",0,"Boeing");
-        aviaoCapacidadeNegativa = new Aviao(3,"Airbus A320",-2,"Airbus");
+        aviao = new Aviao(1, "Boeing 737", 200, "Boeing");
     }
 
     //Cadastrar avião com modelo e capacidade válidos → Deve ser salvo corretamente
     @Test
-    public void cadastrarAviãoModeloCapacidadeValidos(){
-        Assertions.assertTrue(aviaoApplication.salvar(aviaoValido));
+    public void criarAviaoComCapacidadeValida() {
+        aviaoApplication.salvar(aviao);
+
+        Aviao buscado = aviaoApplication.buscarPorId(1);
+        Assertions.assertEquals(aviao, buscado);
     }
 
     //Tentar cadastrar avião com capacidade zero → Deve lançar exceção ou falhar
     @Test
-    public void cadastrarAviãoCapacidadeZero(){
+    public void criarAviaoComCapacidadeZero() {
+        Aviao aviaoCapacidadeZero = new Aviao(2,"Boeing 737",0,"Boeing");
         Assertions.assertFalse(aviaoApplication.salvar(aviaoCapacidadeZero));
     }
 
     //Tentar cadastrar avião com capacidade negativa → Deve lançar exceção ou falhar
     @Test
-    public void cadastrarAviãoCapacidadeNegativa(){
+    public void criarAviaoComCapacidadeNegativa() {
+        Aviao aviaoCapacidadeNegativa = new Aviao(2,"Boeing 737",-1,"Boeing");
         Assertions.assertFalse(aviaoApplication.salvar(aviaoCapacidadeNegativa));
     }
 
@@ -62,26 +64,5 @@ public class AviaoTest {
         Assertions.assertEquals(aviao2.getFabricante(),avioes.get(1).getFabricante());
         Assertions.assertEquals(aviao1.getId(),avioes.get(0).getId());
         Assertions.assertEquals(aviao2.getId(),avioes.get(1).getId());
-    }
-
-    @Test
-    public void buscarAviaoPorId(){
-        aviaoApplication.salvar(aviaoValido);
-        Aviao aviao = aviaoApplication.buscarPorId(1);
-
-        Assertions.assertEquals(1,aviao.getId());
-        Assertions.assertEquals("EMB 190",aviao.getModelo());
-        Assertions.assertEquals(2,aviao.getCapacidade());
-        Assertions.assertEquals("Embraer",aviao.getFabricante());
-    }
-
-    @Test
-    public void testToStringDeAviao() {
-        Aviao aviao = new Aviao(1, "Boeing 737", 200, "Boeing");
-
-        String esperado = "Aviao{id=1, modelo='Boeing 737', capacidade=200, fabricante='Boeing'}";
-        String resultado = aviao.toString();
-
-        Assertions.assertEquals(esperado, resultado);
     }
 }

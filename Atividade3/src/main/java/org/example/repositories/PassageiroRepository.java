@@ -17,10 +17,6 @@ public class PassageiroRepository {
         return passageiro;
     }
 
-    public boolean existe(int id) {
-        return passageiros.stream().anyMatch(p -> p.getId() == id);
-    }
-
     public void salvar(Passageiro passageiro) {
         passageiros.add(passageiro);
     }
