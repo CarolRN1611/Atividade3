@@ -20,15 +20,7 @@ public class PassageiroApplication {
         return this.passageiroRepository.buscarPorId(id);
     }
 
-    public boolean existe(int id) {
-        return this.passageiroRepository.existe(id);
-    }
-
     public boolean salvar(Passageiro passageiro) {
-        if (existe(passageiro.getId())) {
-            System.out.println("Erro: Já existe um passageiro com esse ID.");
-            return false;
-        }
 
         if (!validarDadosPassageiro(passageiro)) {
             System.out.println("Erro: CPF ou Email inválido.");

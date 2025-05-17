@@ -20,15 +20,7 @@ public class AviaoApplication {
         return this.aviaoRepository.buscarPorId(id);
     }
 
-    public boolean existe(int id) {
-        return this.aviaoRepository.existe(id);
-    }
-
     public boolean salvar(Aviao aviao) {
-        if (existe(aviao.getId())) {
-            System.out.println("Erro: Já existe um avião com esse ID.");
-            return false;
-        }
         if (aviao.getCapacidade() <= 0) {
             System.out.println("Erro: Capacidade deve ser maior que 0.");
             return false;

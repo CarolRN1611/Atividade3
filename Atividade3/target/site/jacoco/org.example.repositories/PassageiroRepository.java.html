@@ -13,12 +13,12 @@ import java.util.List;
     }
 
     public Passageiro buscarPorId(int id) {
-<span class="nc bnc" id="L16" title="All 2 branches missed.">        Passageiro passageiro = passageiros.stream().filter(p -&gt; p.getId() == id).findFirst().get();</span>
-<span class="nc" id="L17">        return passageiro;</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        Passageiro passageiro = passageiros.stream().filter(p -&gt; p.getId() == id).findFirst().get();</span>
+<span class="fc" id="L17">        return passageiro;</span>
     }
 
     public boolean existe(int id) {
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        return passageiros.stream().anyMatch(p -&gt; p.getId() == id);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        return passageiros.stream().anyMatch(p -&gt; p.getId() == id);</span>
     }
 
     public void salvar(Passageiro passageiro) {

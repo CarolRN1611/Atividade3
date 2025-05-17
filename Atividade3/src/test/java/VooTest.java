@@ -15,37 +15,41 @@ public class VooTest {
     private Voo vooCapacidadeNegativa;
     private VooRepository vooRepository;
     private VooApplication vooApplication;
+    private LocalDateTime dataHora;
+    private Aviao aviao;
 
     @BeforeEach
     public void setUp() {
         vooRepository = new VooRepository();
         vooApplication = new VooApplication(vooRepository);
-        Aviao aviao = new Aviao(1,"EMB 190",2,"Embraer");
-        LocalDateTime dataHora = LocalDateTime.of(2025, 5, 16, 12, 0);
+        aviao = new Aviao(1,"EMB 190",1,"Embraer");
+        dataHora = LocalDateTime.of(2025, 5, 16, 12, 0);
         vooValido = new Voo(1,"Bahia","Rio de Janeiro",dataHora, aviao);
     }
 
+    //Cadastrar voo com origem, destino, data e avião válido → Deve ser salvo corretamente
     @Test
     public void cadastrarVooDadosValidos(){
         Assertions.assertTrue(vooApplication.salvar(vooValido));
     }
 
+    //Tentar cadastrar voo sem avião associado → Deve lançar exceção ou falhar
     @Test
     public void cadastrarVooSemAviaoAssociado(){
         LocalDateTime dataHora = LocalDateTime.of(2025, 5, 20, 16, 30);
         Aviao aviao = null;
-        Assertions.assertThrows(IllegalArgumentException.class,()->{
-            Voo vooSemAviao = new Voo(2,"São Paulo","Orlando",dataHora, aviao);;
-        });
+        Voo vooSemAviao = new Voo(2,"São Paulo","Orlando",dataHora, aviao);
+        Assertions.assertFalse(vooApplication.salvar(vooSemAviao));
     }
 
+    //Listar voos após 1 cadastro → Deve retornar 1 registro com dados do avião
     @Test
     public void listarVooApos1Cadastros(){
         vooApplication.salvar(vooValido);
         List<Voo> voos = vooApplication.buscarTodos();
 
         Assertions.assertEquals(1,voos.size());
-        Voo voo = voos.get(0);
+        Voo voo = vooApplication.buscarPorId(1);
 
         Assertions.assertEquals(vooValido.getOrigem(),voo.getOrigem());
         Assertions.assertEquals(vooValido.getDestino(),voo.getDestino());
@@ -54,4 +58,28 @@ public class VooTest {
         Assertions.assertEquals(vooValido.getAviao().getCapacidade(),voo.getAviao().getCapacidade());
         Assertions.assertEquals(vooValido.getAviao().getFabricante(),voo.getAviao().getFabricante());
     }
+
+    @Test
+    public void cadastrarVooSemVagasDisponiveis(){
+        Aviao aviao2 = new Aviao(2,"EMB 190",0,"Embraer");
+        LocalDateTime dataHora = LocalDateTime.of(2025, 5, 20, 16, 30);
+        Voo vooSemAviao = new Voo(2,"São Paulo","Orlando",dataHora, aviao2);
+        Assertions.assertFalse(vooApplication.salvar(vooSemAviao));
+    }
+
+    @Test
+    public void testToStringDeVoo() {
+        Aviao aviao = new Aviao(1, "EMB 190", 100, "Embraer");
+        LocalDateTime dataHora = LocalDateTime.of(2025, 5, 16, 12, 0);
+        Voo voo = new Voo(1, "Bahia", "Rio de Janeiro", dataHora, aviao);
+
+        String resultado = voo.toString();
+
+        Assertions.assertTrue(resultado.contains("id=1"));
+        Assertions.assertTrue(resultado.contains("origem='Bahia'"));
+        Assertions.assertTrue(resultado.contains("destino='Rio de Janeiro'"));
+        Assertions.assertTrue(resultado.contains("dataHora=2025-05-16T12:00"));
+        Assertions.assertTrue(resultado.contains("aviao=Aviao{id=1, modelo='EMB 190', capacidade=100, fabricante='Embraer'}"));
+    }
+
 }

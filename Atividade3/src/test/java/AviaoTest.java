@@ -23,21 +23,25 @@ public class AviaoTest {
         aviaoCapacidadeNegativa = new Aviao(3,"Airbus A320",-2,"Airbus");
     }
 
+    //Cadastrar avião com modelo e capacidade válidos → Deve ser salvo corretamente
     @Test
     public void cadastrarAviãoModeloCapacidadeValidos(){
         Assertions.assertTrue(aviaoApplication.salvar(aviaoValido));
     }
 
+    //Tentar cadastrar avião com capacidade zero → Deve lançar exceção ou falhar
     @Test
     public void cadastrarAviãoCapacidadeZero(){
         Assertions.assertFalse(aviaoApplication.salvar(aviaoCapacidadeZero));
     }
 
+    //Tentar cadastrar avião com capacidade negativa → Deve lançar exceção ou falhar
     @Test
     public void cadastrarAviãoCapacidadeNegativa(){
         Assertions.assertFalse(aviaoApplication.salvar(aviaoCapacidadeNegativa));
     }
 
+    //Listar aviões após 2 cadastros → Deve retornar 2 registros
     @Test
     public void listarAviaoApos2Cadastros(){
         Aviao aviao1 = new Aviao(1, "EMB 190", 2, "Embraer");
@@ -58,5 +62,26 @@ public class AviaoTest {
         Assertions.assertEquals(aviao2.getFabricante(),avioes.get(1).getFabricante());
         Assertions.assertEquals(aviao1.getId(),avioes.get(0).getId());
         Assertions.assertEquals(aviao2.getId(),avioes.get(1).getId());
+    }
+
+    @Test
+    public void buscarAviaoPorId(){
+        aviaoApplication.salvar(aviaoValido);
+        Aviao aviao = aviaoApplication.buscarPorId(1);
+
+        Assertions.assertEquals(1,aviao.getId());
+        Assertions.assertEquals("EMB 190",aviao.getModelo());
+        Assertions.assertEquals(2,aviao.getCapacidade());
+        Assertions.assertEquals("Embraer",aviao.getFabricante());
+    }
+
+    @Test
+    public void testToStringDeAviao() {
+        Aviao aviao = new Aviao(1, "Boeing 737", 200, "Boeing");
+
+        String esperado = "Aviao{id=1, modelo='Boeing 737', capacidade=200, fabricante='Boeing'}";
+        String resultado = aviao.toString();
+
+        Assertions.assertEquals(esperado, resultado);
     }
 }

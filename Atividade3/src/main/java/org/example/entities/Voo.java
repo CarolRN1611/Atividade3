@@ -13,15 +13,11 @@ public class Voo {
     private List<Reserva> reservas = new ArrayList<>();
 
     public Voo(int id, String origem, String destino, LocalDateTime dataHora, Aviao aviao) {
-        if (aviao == null) {
-            throw new IllegalArgumentException("Voo deve estar vinculado a um avião.");
-        }
         this.id = id;
         this.origem = origem;
         this.destino = destino;
         this.dataHora = dataHora;
         this.aviao = aviao;
-        aviao.getVoos().add(this);
     }
 
     public int getId() {

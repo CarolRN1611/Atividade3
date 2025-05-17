@@ -17,36 +17,28 @@ public class PassageiroApplication {
     }
 
     public Passageiro buscarPorId(int id) {
-<span class="nc" id="L20">        return this.passageiroRepository.buscarPorId(id);</span>
-    }
-
-    public boolean existe(int id) {
-<span class="fc" id="L24">        return this.passageiroRepository.existe(id);</span>
+<span class="fc" id="L20">        return this.passageiroRepository.buscarPorId(id);</span>
     }
 
     public boolean salvar(Passageiro passageiro) {
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (existe(passageiro.getId())) {</span>
-<span class="nc" id="L29">            System.out.println(&quot;Erro: Já existe um passageiro com esse ID.&quot;);</span>
-<span class="nc" id="L30">            return false;</span>
+
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (!validarDadosPassageiro(passageiro)) {</span>
+<span class="fc" id="L26">            System.out.println(&quot;Erro: CPF ou Email inválido.&quot;);</span>
+<span class="fc" id="L27">            return false;</span>
         }
 
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (!validarDadosPassageiro(passageiro)) {</span>
-<span class="fc" id="L34">            System.out.println(&quot;Erro: CPF ou Email inválido.&quot;);</span>
-<span class="fc" id="L35">            return false;</span>
-        }
-
-<span class="fc" id="L38">        this.passageiroRepository.salvar(passageiro);</span>
-<span class="fc" id="L39">        return true;</span>
+<span class="fc" id="L30">        this.passageiroRepository.salvar(passageiro);</span>
+<span class="fc" id="L31">        return true;</span>
     }
 
     public static boolean validarDadosPassageiro(Passageiro passageiro){
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (!passageiro.validarCPF(passageiro.getCpf())) {</span>
-<span class="fc" id="L44">            return false;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (!passageiro.validarCPF(passageiro.getCpf())) {</span>
+<span class="fc" id="L36">            return false;</span>
         }
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (!passageiro.validarEmail(passageiro.getEmail())) {</span>
-<span class="nc" id="L47">            return false;</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (!passageiro.validarEmail(passageiro.getEmail())) {</span>
+<span class="fc" id="L39">            return false;</span>
         }
-<span class="fc" id="L49">        return true;</span>
+<span class="fc" id="L41">        return true;</span>
     }
 
 }

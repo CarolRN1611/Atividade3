@@ -26,6 +26,10 @@ public class Passageiro {
         return cpf;
     }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -39,6 +43,7 @@ public class Passageiro {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 
     public boolean validarCPF(String cpf) {
         cpf = cpf.replaceAll("[^\\d]", "");

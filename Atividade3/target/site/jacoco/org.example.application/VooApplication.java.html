@@ -16,29 +16,21 @@ public class VooApplication {
     }
 
     public Voo buscarPorId(int id) {
-<span class="nc" id="L19">        return this.vooRepository.buscarPorId(id);</span>
-    }
-
-    public boolean existe(int id) {
-<span class="fc" id="L23">        return this.vooRepository.existe(id);</span>
+<span class="fc" id="L19">        return this.vooRepository.buscarPorId(id);</span>
     }
 
     public boolean salvar(Voo voo) {
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (existe(voo.getId())) {</span>
-<span class="nc" id="L28">            System.out.println(&quot;Erro: Já existe um voo com esse ID.&quot;);</span>
-<span class="nc" id="L29">            return false;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (voo.getAviao() == null) {</span>
+<span class="fc" id="L24">            System.out.println(&quot;Erro: O voo deve estar vinculado a um avião.&quot;);</span>
+<span class="fc" id="L25">            return false;</span>
         }
-<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (voo.getAviao() == null) {</span>
-<span class="nc" id="L32">            System.out.println(&quot;Erro: O voo deve estar vinculado a um avião.&quot;);</span>
-<span class="nc" id="L33">            return false;</span>
-        }
-<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (voo.vagasDisponiveis() &lt;= 0) {</span>
-<span class="nc" id="L36">            System.out.println(&quot;Erro: O voo não possui vagas disponíveis.&quot;);</span>
-<span class="nc" id="L37">            return false;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if (voo.vagasDisponiveis() &lt;= 0) {</span>
+<span class="fc" id="L28">            System.out.println(&quot;Erro: O voo não possui vagas disponíveis.&quot;);</span>
+<span class="fc" id="L29">            return false;</span>
         }
 
-<span class="fc" id="L40">        this.vooRepository.salvar(voo);</span>
-<span class="fc" id="L41">        return true;</span>
+<span class="fc" id="L32">        this.vooRepository.salvar(voo);</span>
+<span class="fc" id="L33">        return true;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

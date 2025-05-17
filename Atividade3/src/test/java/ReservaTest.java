@@ -18,23 +18,26 @@ public class ReservaTest {
     private LocalDateTime dataHora;
     private Voo voo;
     private Aviao aviao;
+    private Passageiro passageiro;
 
     @BeforeEach
     public void setUp() {
         reservaRepository = new ReservaRepository();
         reservaApplication = new ReservaApplication(reservaRepository);
         aviao = new Aviao(1,"EMB 190",2,"Embraer");
-        Passageiro passageiro = new Passageiro(1, "João Silva", "123.456.789-09", "joao@email.com");
+        passageiro = new Passageiro(1, "João Silva", "123.456.789-09", "joao@email.com");
         dataHora = LocalDateTime.of(2025, 5, 16, 12, 0);
         voo = new Voo(1,"Bahia","Rio de Janeiro",dataHora, aviao);
         reservaValido = new Reserva(1,passageiro,voo,dataHora);
 
     }
-
+    //Criar reserva com vagas disponíveis → Deve ser realizada com sucesso
     @Test
     public void cadastrarReservaVagasDisponiveis(){
         Assertions.assertTrue(reservaApplication.salvar(reservaValido));
     }
+
+    //Criar reserva quando todas as vagas estiverem ocupadas → Deve falhar ou lançar exceção
     @Test
     public void cadastrarReservaVagasIndisponiveis(){
         Passageiro passageiro2 = new Passageiro(2, "Mariana Silva", "931.073.680-16", "Mariana@email.com");
@@ -45,6 +48,17 @@ public class ReservaTest {
         Assertions.assertFalse(reservaApplication.salvar(reserva));
     }
 
+    //Criar reserva duplicada para o mesmo passageiro e voo → Deve impedir ou notificar (se implementado)
+    @Test
+    public void reservaDuplicadaPassageiroVoo(){
+        reservaApplication.salvar(reservaValido);
+        Reserva reserva2 = new Reserva(2,passageiro,voo,dataHora);
+        Assertions.assertFalse(reservaApplication.salvar(reserva2));
+    }
+
+
+
+    //Listar reservas após 2 registros → Deve retornar 2 reservas com passageiro e voo
     @Test
     public void listarReservasApos2Registros(){
 
@@ -75,4 +89,21 @@ public class ReservaTest {
         Assertions.assertEquals(dataHora, r2.getDataReserva());
 
     }
+
+    @Test
+    public void testToStringDeReserva() {
+        Passageiro passageiro = new Passageiro(1, "João Silva", "123.456.789-00","joao@gmail.com");
+        Aviao aviao = new Aviao(1, "Boeing 737", 200, "Boeing");
+        Voo voo = new Voo(1,"Maranhão", "Rio Grande do Sul",dataHora,aviao);
+        Reserva reserva = new Reserva(1, passageiro, voo, LocalDateTime.of(2024, 5, 1, 14, 30));
+
+        String resultado = reserva.toString();
+
+        Assertions.assertTrue(resultado.contains("id=1"));
+        Assertions.assertTrue(resultado.contains("passageiro=" + passageiro.toString()));
+        Assertions.assertTrue(resultado.contains("voo=" + voo.toString()));
+        Assertions.assertTrue(resultado.contains("dataReserva=2024-05-01T14:30"));
+    }
+
+
 }

@@ -32,10 +32,6 @@ public class Reserva {
         return dataReserva;
     }
 
-    public boolean disponibilidadeNoVoo(){
-        return (voo.vagasDisponiveis() > 0);
-    }
-
     @Override
     public String toString() {
         return "Reserva{" +

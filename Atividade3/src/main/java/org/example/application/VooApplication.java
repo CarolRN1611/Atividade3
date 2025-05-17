@@ -19,15 +19,7 @@ public class VooApplication {
         return this.vooRepository.buscarPorId(id);
     }
 
-    public boolean existe(int id) {
-        return this.vooRepository.existe(id);
-    }
-
     public boolean salvar(Voo voo) {
-        if (existe(voo.getId())) {
-            System.out.println("Erro: Já existe um voo com esse ID.");
-            return false;
-        }
         if (voo.getAviao() == null) {
             System.out.println("Erro: O voo deve estar vinculado a um avião.");
             return false;

@@ -12,18 +12,9 @@ import java.util.List;
 <span class="fc" id="L12">        return reservas;</span>
     }
 
-    public Reserva buscarPorId(int id) {
-<span class="nc bnc" id="L16" title="All 2 branches missed.">        Reserva reserva = reservas.stream().filter(p -&gt; p.getId() == id).findFirst().get();</span>
-<span class="nc" id="L17">        return reserva;</span>
-    }
-
-    public boolean existe(int id) {
-<span class="nc bnc" id="L21" title="All 2 branches missed.">        return reservas.stream().anyMatch(p -&gt; p.getId() == id);</span>
-    }
-
     public void salvar(Reserva reserva) {
-<span class="fc" id="L25">        reservas.add(reserva);</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L16">        reservas.add(reserva);</span>
+<span class="fc" id="L17">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

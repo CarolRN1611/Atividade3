@@ -13,48 +13,44 @@ public class Voo {
 <span class="fc" id="L13">    private List&lt;Reserva&gt; reservas = new ArrayList&lt;&gt;();</span>
 
 <span class="fc" id="L15">    public Voo(int id, String origem, String destino, LocalDateTime dataHora, Aviao aviao) {</span>
-<span class="fc bfc" id="L16" title="All 2 branches covered.">        if (aviao == null) {</span>
-<span class="fc" id="L17">            throw new IllegalArgumentException(&quot;Voo deve estar vinculado a um avião.&quot;);</span>
-        }
-<span class="fc" id="L19">        this.id = id;</span>
-<span class="fc" id="L20">        this.origem = origem;</span>
-<span class="fc" id="L21">        this.destino = destino;</span>
-<span class="fc" id="L22">        this.dataHora = dataHora;</span>
-<span class="fc" id="L23">        this.aviao = aviao;</span>
-<span class="fc" id="L24">        aviao.getVoos().add(this);</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L16">        this.id = id;</span>
+<span class="fc" id="L17">        this.origem = origem;</span>
+<span class="fc" id="L18">        this.destino = destino;</span>
+<span class="fc" id="L19">        this.dataHora = dataHora;</span>
+<span class="fc" id="L20">        this.aviao = aviao;</span>
+<span class="fc" id="L21">    }</span>
 
     public int getId() {
-<span class="fc" id="L28">        return id;</span>
+<span class="fc" id="L24">        return id;</span>
     }
 
     public String getOrigem() {
-<span class="fc" id="L32">        return origem;</span>
+<span class="fc" id="L28">        return origem;</span>
     }
 
     public String getDestino() {
-<span class="fc" id="L36">        return destino;</span>
+<span class="fc" id="L32">        return destino;</span>
     }
 
     public LocalDateTime getDataHora() {
-<span class="fc" id="L40">        return dataHora;</span>
+<span class="fc" id="L36">        return dataHora;</span>
     }
 
     public Aviao getAviao() {
-<span class="fc" id="L44">        return aviao;</span>
+<span class="fc" id="L40">        return aviao;</span>
     }
 
     public List&lt;Reserva&gt; getReservas() {
-<span class="fc" id="L48">        return reservas;</span>
+<span class="fc" id="L44">        return reservas;</span>
     }
 
     public int vagasDisponiveis(){
-<span class="fc" id="L52">        return (aviao.getCapacidade() - reservas.size());</span>
+<span class="fc" id="L48">        return (aviao.getCapacidade() - reservas.size());</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L57">        return &quot;Voo{&quot; +</span>
+<span class="fc" id="L53">        return &quot;Voo{&quot; +</span>
                 &quot;id=&quot; + id +
                 &quot;, origem='&quot; + origem + '\'' +
                 &quot;, destino='&quot; + destino + '\'' +
