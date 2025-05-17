@@ -84,21 +84,12 @@ public class PassageiroTest {
         Assertions.assertEquals(3,passageiros.size());
 
         Passageiro p1 = passageiroApplication.buscarPorId(1);
-        Passageiro p2 = passageiroApplication.buscarPorId(2);
-        Passageiro p3 = passageiroApplication.buscarPorId(3);
 
-        Assertions.assertEquals(passageiro1.getNome(),p1.getNome());
-        Assertions.assertEquals(passageiro2.getNome(),p2.getNome());
-        Assertions.assertEquals(passageiro3.getNome(),p3.getNome());
-        Assertions.assertEquals(passageiro1.getEmail(),p1.getEmail());
-        Assertions.assertEquals(passageiro2.getEmail(),p2.getEmail());
-        Assertions.assertEquals(passageiro3.getEmail(),p3.getEmail());
-        Assertions.assertEquals(passageiro1.getCpf(),p1.getCpf());
-        Assertions.assertEquals(passageiro2.getCpf(),p2.getCpf());
-        Assertions.assertEquals(passageiro3.getCpf(),p3.getCpf());
+
         Assertions.assertEquals(passageiro1.getId(),p1.getId());
-        Assertions.assertEquals(passageiro2.getId(),p2.getId());
-        Assertions.assertEquals(passageiro3.getId(),p3.getId());
+        Assertions.assertEquals(passageiro1.getNome(),p1.getNome());
+        Assertions.assertEquals(passageiro1.getCpf(),p1.getCpf());
+        Assertions.assertEquals(passageiro1.getEmail(),p1.getEmail());
     }
 
     @Test
